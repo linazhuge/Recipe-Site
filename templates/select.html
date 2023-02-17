@@ -1,0 +1,20 @@
+{% load static %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'recipe.css' %}"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Unica+One&display=swap" rel="stylesheet"> 
+    
+</head>
+
+<form action="" method="post">
+    <a href = "{% url 'login' %}">Go Home</a>
+    
+    <h3>Input a link for a recipe.</h3>
+    {% csrf_token %}
+    {{form.as_p }}
+    <input type="submit" value="Enter">
+    <a href="{% url 'showall' %}">See your recipes!</a>
+    
+</form>
+    

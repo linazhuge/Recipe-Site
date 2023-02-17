@@ -1,0 +1,28 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="{% static 'recipe.css' %}"> 
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Unica+One&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+        <h1>Edit {{ recipe_name }} Details</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p }}
+            <input type="submit" value="Save Changes">
+            <a href="{% url 'showall' %}">Go Back to Recipes</a>
+            
+            <!--
+            <label for="r_name">Recipe Name:</label>
+            <input type="text" name="r_name" value="{{ recipe_name }}"> <br>
+            <label for="r_ingres">Ingredients:</label> <br>
+            <textarea name="r_ingres" rows="20" cols="50">{{ ingredients }}</textarea> <br>
+            <label for="r_instruct">Instructions:</label> <br>
+            <textarea name="r_instruct" rows="20" cols="50">{{ instructions }}</textarea> <br> -->
+        </form>
+        
+    </body>
+</html>

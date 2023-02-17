@@ -1,0 +1,46 @@
+* {
+    font-family: 'Lexend', sans-serif;
+}
+
+table {
+    position: center;
+    align-self: center;
+    background-color: rgb(192, 189, 189);
+    border: 2px solid;
+    border-color: black;
+    border-spacing: 0px;
+    margin: 10px;
+}
+
+th {
+    color: rgb(255, 255, 255);
+    font-family: 'Unica One', cursive;
+}
+
+td {
+    font-family: 'Lexend', sans-serif;
+    color: black;
+    border: 2px solid;
+    border-color: black;
+}
+
+th, td {
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+    padding: 5px;
+}
+
+th:last-child, td:last-child {
+    border-right-width: 0px;
+}
+
+.table1 {
+    margin: auto;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+
+.select {
+    padding: 10px;
+}

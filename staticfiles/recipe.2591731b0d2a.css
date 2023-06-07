@@ -1,0 +1,71 @@
+* {
+    font-family: 'Lexend', sans-serif;
+    background-color: #fff9f1;
+}
+
+th {
+    color: rgb(255, 255, 255);
+}
+
+th, td {
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+    padding: 5px;
+}
+
+th:last-child, td:last-child {
+    border-right-width: 0px;
+}
+
+h1 {
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited {
+    color: darkslateblue;
+    
+}
+
+.top_links {
+    justify-content: space-between;
+    display: flex;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+}
+
+#display_recipe_title {
+    height: 200px;
+    line-height: 200px;
+    vertical-align: middle;
+    background-position: center;
+    background-size: cover;
+    font-size: 80px;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    font-family: 'WindSong', cursive;
+    margin: 5px;
+    padding: 0%;
+    text-shadow:
+        -1px -1px 0 #c9c9c9,
+        0   -1px 0 #c9c9c9,
+        1px -1px 0 #c9c9c9,
+        1px  0   0 #c9c9c9,
+        1px  1px 0 #c9c9c9,
+        0    1px 0 #c9c9c9,
+        -1px  1px 0 #c9c9c9,
+        -1px  0   0 #c9c9c9;
+}
+
+#display_ingredients {
+    max-width: 40%;
+}
+
+#display_instructions {
+    max-width: 90%;
+}

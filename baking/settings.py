@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0_l8!0nyck2zremy%le=v)k12#$ty2l)ejq1a4^r@lg&90ppa^'
+#SECRET_KEY = 'django-insecure-0_l8!0nyck2zremy%le=v)k12#$ty2l)ejq1a4^r@lg&90ppa^'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '-gq++d6n5!t6$$syc#d0=c-*&!jk8&ycc(p&%c$c4e7bfipm&8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '' != 'False')
 
 ALLOWED_HOSTS = []
 
@@ -40,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'login.apps.PostConfig',
     'selectr.apps.PostConfig',
     'account',
     'newuser',
+    'home.apps.HomeConfig',
     'django_tables2',
+    'colorfield'
 ]
 
 SITE_ID = 1
@@ -140,7 +143,13 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/select'
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
-
-
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }

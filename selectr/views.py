@@ -1,14 +1,20 @@
 import cgi
-from django.shortcuts import render
+import http
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
 from .forms import InputForm, EditForm
 from .models import Recipe
 from django.views.generic import ListView
 import requests
 from django.views import generic
 from bs4 import BeautifulSoup
+from .functions import check_details, choose_colour
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def selectr_view(request):
     context = {
         'username': 'hello',
@@ -18,26 +24,33 @@ def selectr_view(request):
         form.save(commit=False)
         form.save(commit=False).user = request.user
         form.save()
-        print("saved!")
+        messages.success(request, "Recipe Submitted!")
+        form = InputForm()
+        
     
     context['form'] = form
 
-    return render(request, 'select.html', context)
+    return render(request, 'input.html', context)
 
 
 #shows all the recipes in a table for the specific user
+@login_required
 def showall_view(request):
     context = {
-        'recipes': Recipe.objects.filter(user = request.user)
+        'recipes': Recipe.objects.filter(user = request.user).order_by('title')
     }
-    print(Recipe.objects.first().recipe)
-    print()
     return render(request, 'showall.html', context)
 
 # shows the recipe in a simplified format
 def recipe_view(request, pk):
     current_recipe = Recipe.objects.get(pk=pk)
     check_details(current_recipe)
+    if(current_recipe.colour == '#FF0000'):
+        colour = choose_colour(current_recipe)
+        current_recipe.colour = colour
+        current_recipe.save()
+    else:
+        colour = current_recipe.colour
     
     r = requests.get(current_recipe.recipe)
     soup = BeautifulSoup(r.content, 'html.parser')
@@ -50,7 +63,8 @@ def recipe_view(request, pk):
         'description': desc.getText(),
         'ingredients': current_recipe.ingres,
         'instructions': current_recipe.instruct, 
-        'image': current_recipe.image
+        'image': current_recipe.image,
+        'colour': colour
     }
     return render(request, 'recipe.html', context)
 
@@ -66,8 +80,9 @@ def edit_view(request, pk):
     context = {
         'recipe_name': current_recipe.title,
         'ingredients': ingres,
-        'instructions': instruct
+        'instructions': instruct,
     }
+    json = current_recipe.ingres
 
     form = EditForm(request.POST or None, instance=current_recipe)
 
@@ -84,44 +99,14 @@ def edit_view(request, pk):
 
     return render(request, 'edit.html', context)
 
-# function that does the webscraping, checks if its been done
-def check_details(recipe):
-    r = requests.get(recipe.recipe)
-    soup = BeautifulSoup(r.content, 'html.parser')
-
-    #loading the instructions
-    ins = soup.find('div', class_="comp recipe__steps-content mntl-sc-page mntl-block")
-    instr = ins.find_all('p')
-    if(recipe.instruct == " "):
-        lst_instr = []
-        for i in instr:
-            lst_instr.append(i.getText())
-        recipe.instruct = lst_instr
-        recipe.save()
+def delete_view(request, pk):
+    current_recipe = Recipe.objects.get(pk=pk)
     
-    #loading the ingredients
-    if(recipe.ingres == " "):
-        i = soup.find('div', class_="comp mntl-lrs-ingredients mntl-block")
-        ingres = i.find('ul', class_="mntl-structured-ingredients__list")
-
-        lst_ingre = []
-        for ing in ingres:
-            if(not ing.getText().isspace()):
-                lst_ingre.append(ing.getText())
-        recipe.ingres = lst_ingre
-        recipe.save()
-
-    try:
-        i = soup.find('div', class_="img-placeholder")
-        im = i.find('img', class_="loaded primary-img--noscript primary-image__image mntl-primary-image--blurry")
-        recipe.image = im['src']
-    except:
-        try:
-            print("here")
-            i = soup.find('div', class_="img-placeholder")
-            im = i.find('img')
-            recipe.image = im['src']     
-        except:
-            i = soup.find('div')
-            im = i.find('img')
-            recipe.image = im['src']
+    if request.method == 'POST':
+        current_recipe.delete()
+        return redirect('showall')
+    
+    context = {
+        'name': current_recipe.title
+    }
+    return render(request, 'delete.html', context)

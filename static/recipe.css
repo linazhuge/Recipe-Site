@@ -1,10 +1,10 @@
 * {
     font-family: 'Lexend', sans-serif;
+    background-color: #fff9f1;
 }
 
 th {
     color: rgb(255, 255, 255);
-    font-family: 'Unica One', cursive;
 }
 
 th, td {
@@ -21,15 +21,21 @@ h1 {
     text-align: center;
 }
 
-a:visited {
-    color: darkslateblue;
+a{
+    text-decoration: none;
 }
 
-#display_recipe_header {
-    max-width: 100%;
-    padding: 0%;
-    margin: 0%;
-    height: 200px;
+a:visited {
+    color: darkslateblue;
+    
+}
+
+.top_links {
+    justify-content: space-between;
+    display: flex;
+    text-align: center;
+    width: 60%;
+    margin: auto;
 }
 
 #display_recipe_title {
@@ -38,6 +44,28 @@ a:visited {
     vertical-align: middle;
     background-position: center;
     background-size: cover;
-    font-size: 50px;
-    
+    font-size: 80px;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    font-family: 'WindSong', cursive;
+    margin: 5px;
+    padding: 0%;
+    text-shadow:
+        -1px -1px 0 #c9c9c9,
+        0   -1px 0 #c9c9c9,
+        1px -1px 0 #c9c9c9,
+        1px  0   0 #c9c9c9,
+        1px  1px 0 #c9c9c9,
+        0    1px 0 #c9c9c9,
+        -1px  1px 0 #c9c9c9,
+        -1px  0   0 #c9c9c9;
+}
+
+#display_ingredients {
+    max-width: 40%;
+}
+
+#display_instructions {
+    max-width: 90%;
 }

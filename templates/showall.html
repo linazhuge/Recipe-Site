@@ -5,25 +5,38 @@
         <link rel="stylesheet" type = "text/css" href="{% static 'showall.css' %}"> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Unica+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Lexend&family=Unica+One&family=WindSong&family=Yuji+Hentaigana+Akari&display=swap" rel="stylesheet">
     </head>
-    <div class="table1">
-        <table>
-            <tr>
-                <th>Title => click here for simplified view</th>
-                <th>Link => click here for original recipe</th>
-                <th>Edit Recipe</th>
-            </tr>
-            {% for x in recipes %}
-                <tr>
-                    <td><a href="{% url 'view_recipe' x.pk %}">{{ x.title }}</a></td>
-                    <td><a href ="{{ x.recipe }}">{{ x.recipe }}</a></td>
-                    <td><a href ="{% url 'edit' x.pk %}">Edit</a></td>
-
-                </tr>
-            {% endfor %}
-
-        </table>
+    <div class="header">
+        <div id="register_text">
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+        <div id="register_text">
+            <a href="{% url 'select' %}">Input New Recipe</a>
+        </div>        
     </div>
-    
+    <body>
+        <h1>Your Saved Recipes!</h1>
+        <div class="table1">
+            <table class="display_table">
+                <tr>
+                    <th>Simplified View</th>
+                    <th>Original Link</th>
+                    <th>Edit Recipe</th>
+                    <th>Delete Recipe</th>
+                </tr>
+                {% for x in recipes %}
+                    <tr>
+                        <td><a href="{% url 'view_recipe' x.pk %}">{{ x.title }}</a></td>
+                        <td><a href ="{{ x.recipe }}" target="_blank">{{ x.recipe }}</a></td>
+                        <td><a href ="{% url 'edit' x.pk %}">Edit</a></td>
+                        <td><a href ="{% url 'delete' x.pk %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </body>
 </html>

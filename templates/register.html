@@ -1,0 +1,24 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" type = "text/css" href="{% static 'showall.css' %}"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Lexend&family=Unica+One&family=WindSong&family=Yuji+Hentaigana+Akari&display=swap" rel="stylesheet">
+    </head>
+    <div class="header">
+        <h5>If you have an account, login here!</h5>
+        <div id="register_text">
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+    <header>
+        <h1>Register</h1>
+    </header>
+    <form action = "" method="POST">
+        {% csrf_token %}
+        {{form.as_p }}
+        <input type="submit" value="enter">
+    </form>
+    

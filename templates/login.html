@@ -1,6 +1,14 @@
-<form action = "" method = "post">
-    {% csrf_token %}
-    {{form.as_p }}
-    <input type="submit" value="enter">
-    <a href="{% url 'select' %}">Input Recipe</a>
-</form>
+<div class="login">
+    <div class="login_left">
+
+    </div>
+    <div class="login_right">
+        <form action = "" method = "post">
+            {% csrf_token %}
+            {{form.as_p }}
+            <input type="submit" value="enter">
+            <a href="{% url 'select' %}">Input Recipe</a>
+        </form>
+    </div>
+</div>
+

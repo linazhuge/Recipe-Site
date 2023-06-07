@@ -1,0 +1,42 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'recipe.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Unica+One&family=WindSong:wght@500&display=swap" rel="stylesheet"> 
+    </head>
+
+    <body>
+        <header id="display_recipe_header">
+            <h1 style= "background-image: url('{{ image }}'); 
+                        border-color: {{ colour }};" id="display_recipe_title">{{ recipe_name }}</h1>
+        </header>
+        <p>{{ description }}</p>
+        
+        <div style= "display: inline-block; 
+                    vertical_align: top;
+                    width: 100%>
+            <div id="display_ingredients">
+                <h3>Ingredients</h3>
+                <ul>
+                    {% for x in ingredients %}
+                    <li>{{ x }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div id="display_instructions">
+                <h3>Instructions</h3>
+                <ol>
+                    {% for x in instructions %}
+                    <li>{{ x }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </body>
+</html>

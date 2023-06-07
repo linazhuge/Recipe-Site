@@ -1,7 +1,22 @@
-<form action = "" method = "post">
-    <h1>Login</h1>
-    {% csrf_token %}
-    {{form.as_p }}
-    <input type="submit" value="enter">
-    <a href="{% url 'select' %}">Input Recipe</a>
-</form>
+{% load static %}
+<head>
+    <link rel="stylesheet" type = "text/css" href="{% static 'showall.css' %}"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Lexend&family=Unica+One&family=WindSong&family=Yuji+Hentaigana+Akari&display=swap" rel="stylesheet">
+</head>
+
+
+<div class="login">
+    <div class="login_left">
+        <img src="{% static 'login.png' %}" id = 'login_image'>
+    </div>
+    <div class="login_right">
+        <form action = "" method = "post" class="login_class_form">
+                <h1>LOGIN</h1>
+                {% csrf_token %}
+                {{form.as_p }}
+                <input type="submit" value="enter">
+        </form>
+    </div>
+</div>

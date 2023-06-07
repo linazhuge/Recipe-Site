@@ -1,0 +1,39 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" type = "text/css" href="{% static 'showall.css' %}"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Lexend&family=Unica+One&family=WindSong&family=Yuji+Hentaigana+Akari&display=swap" rel="stylesheet">
+        <div class="header">
+            <h5>Logged in as: {{ user }}</h5>
+            <div id="login_text">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+            <div id="register_text">
+                <a href="{% url 'register' %}">Register</a>
+            </div>
+            <div id="register_text">
+                <a href="{% url 'select' %}">Input New Recipe</a>
+            </div>
+            <div id="register_text">
+                <a href="{% url 'showall' %}">See Your Recipes</a>
+            </div>
+        </div>
+        
+        <div class="center_w_header">
+            <form method="post" autocomplete="off">
+            <h1>WELCOME</h1>
+            <h3>Quickly Generate a Simplified View!</h3>
+            <h4>(This recipe will not be saved)</h4>
+            {% csrf_token %}
+            {{form.as_p }}
+            <a href="{% url 'home_recipe' %}">
+                <input type="submit" value="Generate">
+            </a>
+            </form>
+        </div>
+</html>

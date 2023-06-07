@@ -1,0 +1,47 @@
+* {
+    font-family: 'Lexend', sans-serif;
+}
+
+th {
+    color: rgb(255, 255, 255);
+    font-family: 'Unica One', cursive;
+}
+
+th, td {
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+    padding: 5px;
+}
+
+th:last-child, td:last-child {
+    border-right-width: 0px;
+}
+
+h1 {
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited {
+    color: darkslateblue;
+    
+}
+
+#display_recipe_title {
+    height: 200px;
+    line-height: 200px;
+    vertical-align: middle;
+    background-position: center;
+    background-size: cover;
+    font-size: 80px;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    font-family: 'WindSong', cursive;
+    margin: 5px;
+    padding: 0%;
+}
+

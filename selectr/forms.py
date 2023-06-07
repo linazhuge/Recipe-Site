@@ -2,6 +2,7 @@ import json
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import Recipe
+from splitjson.widgets import SplitJSONWidget
 
 class InputForm(forms.ModelForm):
     class Meta:
@@ -17,6 +18,8 @@ class EditForm(forms.ModelForm):
             'ingres': "Ingredients",
             'instruct': "Instructions"
         }
+
+        
         
         
         

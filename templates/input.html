@@ -1,0 +1,42 @@
+{% load static %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'showall.css' %}"> 
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Lexend&family=Unica+One&family=WindSong&family=Yuji+Hentaigana+Akari&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+
+<div class="header">
+    <div id="register_text">
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+    <div id="register_text">
+        <a href="{% url 'showall' %}">See your recipes!</a>
+    </div>
+</div>
+
+<div class="center_w_header">
+    <form action="" method="post" id="RecipeForm" onClick="sucessFunc()">
+
+        <h1>Input a link for a recipe</h1>
+        {% csrf_token %}
+        {{form.as_p }}
+        <input type="submit" value="Enter">
+        
+        
+    </form>
+    <script>
+        function sucessFunc() {
+            var form = document.getElementById("RecipeForm")
+            var url = form.elements['recipe']
+            let url_str = url.value
+            if (form.checkValidity() && (url_str.indexOf("allrecipes") >= 0)) {
+                alert("Recipe Added!");
+            }
+        }
+    </script>
+
+</div>

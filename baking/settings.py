@@ -26,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '-gq++d6n5!t6$$syc#d0=c-*&!jk8&ycc(p&%c$c4e7bfipm&8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '' != 'False')
+#DEBUG = os.environ.get('DJANGO_DEBUG', '' != 'False')
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://web-production-456a.up.railway.app/', '127.0.0.1']
 
@@ -116,12 +117,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static')
-#]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

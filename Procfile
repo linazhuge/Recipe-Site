@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn baking.wsgi
+web: python manage.py migrate && gunicorn 'baking.wsgi'

@@ -13,7 +13,7 @@ def check_details(recipe):
     soup = BeautifulSoup(r.content, 'html.parser')
 
     #loading the instructions
-    if(recipe.instruct == " "):
+    if(not recipe.instruct):
         ins = soup.find('div', class_="comp recipe__steps-content mntl-sc-page mntl-block")
         for tag in ins.find_all('figcaption'):
             tag.decompose()
@@ -24,7 +24,7 @@ def check_details(recipe):
         recipe.instruct = lst_instr
     
     #loading the ingredients
-    if(recipe.ingres == " "):
+    if(not recipe.ingres == " "):
         i = soup.find('div', class_="comp mntl-lrs-ingredients mntl-block")
         ingres = i.find('ul', class_="mntl-structured-ingredients__list")
 

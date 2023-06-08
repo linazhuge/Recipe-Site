@@ -17,8 +17,8 @@ class Recipe(models.Model):
     title = models.CharField(max_length=30)
     recipe = models.URLField(validators=[validate_allrecipes])
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    ingres = models.JSONField(default=" ")
-    instruct = models.JSONField(default=" ")
+    ingres = models.JSONField(default=dict)
+    instruct = models.JSONField(default=dict)
     image = models.URLField()
     colour = ColorField(default='#FF0000')
 

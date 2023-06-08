@@ -27,27 +27,25 @@ def home_view_recipe(request):
     soup = BeautifulSoup(r.content, 'html.parser')
 
     #loading the instructions
-    if(recipe.instruct == " "):
-        ins = soup.find('div', class_="comp recipe__steps-content mntl-sc-page mntl-block")
-        for tag in ins.find_all('figcaption'):
-            tag.decompose()
-        instr = ins.find_all('p')
-        lst_instr = []
-        for i in instr:
-            lst_instr.append(i.getText())
-        recipe.instruct = lst_instr
+    ins = soup.find('div', class_="comp recipe__steps-content mntl-sc-page mntl-block")
+    for tag in ins.find_all('figcaption'):
+        tag.decompose()
+    instr = ins.find_all('p')
+    lst_instr = []
+    for i in instr:
+        lst_instr.append(i.getText())
+    recipe.instruct = lst_instr
     
     #loading the ingredients
-    if(recipe.ingres == " "):
-        i = soup.find('div', class_="comp mntl-lrs-ingredients mntl-block")
-        ingres = i.find('ul', class_="mntl-structured-ingredients__list")
+    i = soup.find('div', class_="comp mntl-lrs-ingredients mntl-block")
+    ingres = i.find('ul', class_="mntl-structured-ingredients__list")
 
-        lst_ingre = []
-        for ing in ingres:
-            if(not ing.getText().isspace()):
-                lst_ingre.append(ing.getText())
-        recipe.ingres = lst_ingre
-        recipe.save()
+    lst_ingre = []
+    for ing in ingres:
+        if(not ing.getText().isspace()):
+            lst_ingre.append(ing.getText())
+    recipe.ingres = lst_ingre
+    recipe.save()
 
     try:
         i = soup.find('div', class_="img-placeholder")

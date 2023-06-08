@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-0_l8!0nyck2zremy%le=v)k12#$ty2l)ejq1a4^r@lg&90ppa^'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '-gq++d6n5!t6$$syc#d0=c-*&!jk8&ycc(p&%c$c4e7bfipm&8')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG_VALUE = os.environ.get('DEBUG_VALUE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '' != 'False')
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['https://web-production-456a.up.railway.app/', '127.0.0.1']
+ALLOWED_HOSTS = ['baking-simplified.herokuapp.com', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://web-production-456a.up.railway.app']
 
@@ -168,3 +170,5 @@ DATABASES['default'].update(db_from_env)
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())

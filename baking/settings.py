@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'django_tables2',
     'colorfield'
 ]
-
 SITE_ID = 1
 
 MIDDLEWARE = [

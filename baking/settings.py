@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+import dj_database_url
 from django.contrib.messages import constants as messages
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +26,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-0_l8!0nyck2zremy%le=v)k12#$ty2l)ejq1a4^r@lg&90ppa^'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '-gq++d6n5!t6$$syc#d0=c-*&!jk8&ycc(p&%c$c4e7bfipm&8')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG_VALUE = os.environ.get('DEBUG_VALUE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+#DEBUG = (os.environ.get('DEBUG_VALUE') == 'False')
+DEBUG = os.getenv("DEBUG", "False") == "True"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
-ALLOWED_HOSTS = ['baking-simplified.herokuapp.com', '127.0.0.1']
+#ALLOWED_HOSTS = ['baking-simplified.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 CSRF_TRUSTED_ORIGINS = ['https://web-production-456a.up.railway.app']
 
@@ -76,12 +82,26 @@ WSGI_APPLICATION = 'baking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+}'''
+
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
 
 
 # Password validation

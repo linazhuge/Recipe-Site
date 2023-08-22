@@ -23,7 +23,9 @@ def home_view(request):
 
 def home_view_recipe(request):
     recipe = Recipe.objects.last()
-    r = requests.get(recipe.recipe)
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'}
+    r = requests.get(recipe.recipe, headers=headers, allow_redirects=True)
+    print(r)
     soup = BeautifulSoup(r.content, 'html.parser')
 
     #loading the instructions

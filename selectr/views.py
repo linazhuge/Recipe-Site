@@ -51,16 +51,17 @@ def recipe_view(request, pk):
         current_recipe.save()
     else:
         colour = current_recipe.colour
-    
-    r = requests.get(current_recipe.recipe)
+
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'}
+    r = requests.get(current_recipe.recipe, headers=headers, allow_redirects=True)
     soup = BeautifulSoup(r.content, 'html.parser')
-    s = soup.find('div', class_="loc article-post-header")
-    desc = s.find('p', class_="comp type--dog article-subheading")
+    #print(r.content)
+    #s = soup.find('div', class_="loc article-post-header")
+    #desc = s.find('p', class_="comp type--dog article-subheading")
 
     context = {
         'recipe_name': current_recipe.title,
         'recipe_link': current_recipe.recipe,
-        'description': desc.getText(),
         'ingredients': current_recipe.ingres,
         'instructions': current_recipe.instruct, 
         'image': current_recipe.image,

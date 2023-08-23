@@ -36,9 +36,8 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 #ALLOWED_HOSTS = ['baking-simplified.herokuapp.com', '127.0.0.1']
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-
-CSRF_TRUSTED_ORIGINS = ['https://web-production-456a.up.railway.app']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost", '10.244.40.226:8080').split(",")
+#CSRF_TRUSTED_ORIGINS = ['https://web-production-456a.up.railway.app']
 
 # Application definition
 

@@ -168,6 +168,7 @@ TEMPLATES = [
     },
 ]
 
+
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
@@ -178,5 +179,6 @@ LOGIN_URL = 'login'
 
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STO
 
+ALLOWED_HOSTS += '10.244.71.136'

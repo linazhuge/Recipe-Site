@@ -7,7 +7,7 @@ class Recipe(models.Model):
     recipe = models.URLField(validators=[validate_allrecipes], max_length=500)
     ingres = models.JSONField(default=dict)
     instruct = models.JSONField(default=dict)
-    image = models.URLField()
+    image = models.URLField(max_length=500)
 
     def __str__(self):
         return self.title

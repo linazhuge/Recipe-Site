@@ -19,7 +19,7 @@ class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     ingres = models.JSONField(default=dict)
     instruct = models.JSONField(default=dict)
-    image = models.URLField()
+    image = models.URLField(max_length=500)
     colour = ColorField(default='#FF0000')
 
     def __str__(self):

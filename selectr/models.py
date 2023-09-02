@@ -15,7 +15,7 @@ def validate_allrecipes(value):
 
 class Recipe(models.Model):
     title = models.CharField(max_length=30)
-    recipe = models.URLField(validators=[validate_allrecipes])
+    recipe = models.URLField(validators=[validate_allrecipes], max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     ingres = models.JSONField(default=dict)
     instruct = models.JSONField(default=dict)

@@ -33,6 +33,7 @@ DEBUG_VALUE = os.environ.get('DEBUG_VALUE')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = (os.environ.get('DEBUG_VALUE') == 'False')
 DEBUG = os.getenv("DEBUG", "False") == "True"
+#DEVELOPMENT_MODE = True
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 #ALLOWED_HOSTS = ['baking-simplified.herokuapp.com', '127.0.0.1']

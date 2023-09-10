@@ -6,15 +6,15 @@ class NewUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1')
-        help_texts = {
-            'email' : None,
-            'username' : None,
-            'password1' : None,
-            'password2' : None
-        }
-        
+
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
         if commit:
             user.save()
         return user
+    
+    def __init__(self, *args, **kwargs):
+        super(NewUserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].help_text = ''
+        self.fields['password1'].help_text = ''
+        self.fields['password2'].help_text = ''
